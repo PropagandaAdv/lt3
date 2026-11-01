@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LT3 | Eventi, comunicazione e formazione ECM per il mondo Pharma</title>
+<meta name="description" content="LT3 progetta eventi, comunica e crea valore attraverso la formazione scientifica. Provider ECM accreditato AGENAS, con Comitato Scientifico e rendicontazione a Co.Ge.A.P.S.">
+<meta name="theme-color" content="#0D2B19">
+<meta property="og:title" content="LT3 | Eventi, comunicazione e formazione ECM">
+<meta property="og:description" content="Dal gesto del singolo alla salute di tutti: il Provider ECM che certifica la qualità di chi cura.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/hero-poster.webp">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hero-poster.webp">
+<style>
+:root{
+  --green:#175632;      /* verde LT3, superfici di brand e CTA */
+  --dark:#0D2B19;       /* verde notte, capitoli scuri e testo */
+  --mist:#F2F6F3;       /* nebbia, canvas di pagina */
+  --white:#FFFFFF;
+  --sage:#A9C7B0;       /* accento: marker, linee, numeri su scuro */
+  --sage-hover:#8FB39A;
+  --text2:#3E5A4A;
+  --line:rgba(23,86,50,.14);
+  --pad:clamp(20px,5vw,40px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Outfit",system-ui,sans-serif;font-weight:400;line-height:1.6;color:var(--dark);background:var(--mist);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--sage);outline-offset:3px}
+.label{font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;line-height:1.3}
+.sq{display:inline-block;width:10px;height:10px;background:var(--green);flex:none}
+.on-dark .sq{background:var(--sage)}
+h1,h2,h3{text-wrap:balance;font-weight:300;letter-spacing:-.03em;line-height:1.06}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--pad)}
+
+/* pulsanti */
+.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:.04em;padding:16px 32px;border-radius:999px;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:background-color .25s,color .25s,border-color .25s}
+.btn-green{background:var(--green);color:var(--white);border-color:var(--sage)}
+.btn-green:hover{background:var(--sage);color:var(--dark)}
+.btn-white{background:var(--white);color:var(--dark)}
+.btn-white:hover{background:var(--sage)}
+.btn-line{color:var(--white);border-color:var(--sage)}
+.btn-line:hover{background:var(--sage);color:var(--dark)}
+.btn-sm{padding:12px 26px;font-size:13px}
+.link{display:inline-block;color:var(--green);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px;transition:color .25s}
+.link:hover{color:var(--sage-hover)}
+
+/* header */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px var(--pad);transition:background-color .3s,box-shadow .3s}
+.hdr img{width:44px}
+.hdr nav{display:flex;gap:36px}
+.hdr nav a{color:var(--white);text-decoration:none;transition:color .25s}
+.hdr nav a:hover{color:var(--sage)}
+.hdr.solid{background:var(--mist);box-shadow:0 1px 0 var(--line)}
+.hdr.solid nav a{color:var(--dark)}
+.hdr.solid nav a:hover{color:var(--green)}
+
+/* hero */
+.hero{position:relative;height:700vh;background:var(--dark)}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.stage::after{content:"";position:absolute;left:0;right:0;top:0;height:150px;background:linear-gradient(180deg,rgba(13,43,25,.62),rgba(13,43,25,0));z-index:1;pointer-events:none}
+.media{position:absolute;inset:0;background:var(--dark) url(assets/hero-poster.webp) center/cover no-repeat}
+.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+.media.ok video{opacity:1}
+.scrim{position:absolute;inset:0;opacity:0;transition:opacity .6s;background:linear-gradient(90deg,rgba(13,43,25,.86) 0%,rgba(13,43,25,.6) 34%,rgba(13,43,25,0) 66%),linear-gradient(0deg,rgba(13,43,25,.55) 0%,rgba(13,43,25,0) 40%)}
+.load{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(169,199,176,.25);transition:opacity .6s}
+.load i{display:block;height:100%;width:0;background:var(--sage)}
+.hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);font-weight:600;font-size:11px;letter-spacing:.3em;color:var(--mist);transition:opacity .4s}
+.cap{position:absolute;left:clamp(24px,6vw,96px);bottom:13vh;max-width:min(560px,40vw);display:flex;flex-direction:column;gap:18px;color:var(--white);opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;pointer-events:none;z-index:2}
+.cap.on{opacity:1;transform:none;pointer-events:auto}
+.cap .label{color:var(--sage)}
+.cap p{font-weight:300;font-size:19px;line-height:1.55}
+.payoff{max-width:min(720px,52vw);gap:28px}
+.payoff h2{font-size:clamp(30px,3.2vw,46px);letter-spacing:-.03em}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;padding-top:8px}
+
+/* anime */
+.sec{padding:clamp(88px,10vw,144px) 0}
+.anime-head{display:flex;flex-direction:column;gap:18px;margin-bottom:72px}
+.anime-head h2{font-size:clamp(36px,5vw,64px);letter-spacing:-.035em;max-width:900px}
+.anime-head p{font-size:18px;color:var(--text2);max-width:640px}
+.cards{display:flex;gap:32px;align-items:flex-start;justify-content:space-between}
+.card{width:31.5%;display:flex;flex-direction:column;gap:18px}
+.card:nth-child(2){padding-top:80px}
+.card:nth-child(3){padding-top:160px}
+.card img{width:100%;border-radius:2px;aspect-ratio:4/5;object-fit:cover}
+.card .head{display:flex;align-items:center;gap:12px;color:var(--green)}
+.card h3{font-size:clamp(34px,3.2vw,44px);letter-spacing:-.03em}
+.card p{font-size:18px;color:var(--text2)}
+
+/* metodo */
+.dark{background:var(--dark);color:var(--white)}
+.metodo-top{display:flex;justify-content:space-between;gap:56px;margin-bottom:88px}
+.metodo-top>div:first-child{width:52%;display:flex;flex-direction:column;gap:22px}
+.metodo-top h2{font-size:clamp(30px,3.6vw,46px);letter-spacing:-.03em;line-height:1.1}
+.dark .label{color:var(--sage)}
+.pillars{width:40%;list-style:none}
+.pillars li{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid rgba(169,199,176,.28);font-weight:300;font-size:22px;letter-spacing:-.01em}
+.row4{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;margin-bottom:88px}
+.row4>div{width:calc(25% - 24px);border-top:1px solid rgba(169,199,176,.3);padding-top:28px}
+.num{font-weight:300;font-size:clamp(44px,5vw,64px);letter-spacing:-.04em;line-height:1;color:var(--sage);font-variant-numeric:tabular-nums}
+.num-l{margin-top:10px;font-size:15px;line-height:1.4}
+.step{display:flex;flex-direction:column;gap:14px;padding-top:24px}
+.step h3{font-size:26px;letter-spacing:-.015em;line-height:1.15}
+.row4.steps{margin-bottom:0}
+
+/* contatti */
+.contatti{display:flex;justify-content:space-between;align-items:flex-start;gap:56px}
+.contatti .info{width:36%;display:flex;flex-direction:column;gap:22px}
+.contatti .info h2{font-size:clamp(36px,4.4vw,60px);letter-spacing:-.035em}
+.contatti .info p{font-size:18px;display:flex;gap:14px;align-items:flex-start}
+.contatti .info .sq{margin-top:10px}
+.formcard{width:55%;background:var(--white);border:1px solid var(--line);padding:44px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px}
+.f{display:flex;flex-direction:column;gap:7px}
+.f.full{grid-column:1/-1}
+.f label{font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.f input,.f select,.f textarea{font:inherit;font-size:15px;color:var(--dark);background:var(--white);border:1px solid rgba(23,86,50,.28);border-radius:2px;padding:13px 14px;width:100%}
+.f input:focus,.f select:focus,.f textarea:focus{outline:2px solid var(--green);outline-offset:0;border-color:var(--green)}
+.f.consent{flex-direction:row;gap:12px;align-items:flex-start;font-size:14px;color:var(--text2)}
+.consent input{margin-top:4px;accent-color:var(--green);width:auto}
+.formcard .btn{margin-top:8px}
+.ok-msg{font-size:22px;font-weight:300;letter-spacing:-.01em;padding:24px 0}
+.err-msg{color:#8a2b1c;font-size:14px;margin-top:12px}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding-top:96px}
+.ft{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;margin-bottom:48px}
+.ft img{width:150px}
+.ft .legal{width:44%;display:flex;flex-direction:column;gap:14px;font-size:15px}
+.ft .legal small{font-size:14px;color:var(--text2)}
+.ft .links{width:20%;display:flex;flex-direction:column;gap:14px}
+.ft .links a{text-decoration:none}
+.copy{font-size:13px;color:var(--text2);padding-bottom:72px}
+.medu{background:var(--white);border-top:1px solid var(--line);padding:48px var(--pad);display:flex;justify-content:center}
+.medu img{width:420px}
+
+/* versione statica (tablet, mobile, movimento ridotto) */
+@media (max-width:1024px),(prefers-reduced-motion:reduce){
+  .hero{height:auto}
+  .stage{position:static;height:auto;overflow:visible;display:flex;flex-direction:column}
+  .media{display:none}
+  .cap,.payoff{position:relative;left:auto;bottom:auto;max-width:none;width:100%;opacity:1;transform:none;pointer-events:auto;min-height:92svh;justify-content:flex-end;padding:120px 24px 56px;transition:none}
+  .cap-1{background:linear-gradient(180deg,rgba(13,43,25,.35),rgba(13,43,25,.9)),url(assets/hero-frame-A.webp) center/cover}
+  .cap-2{background:linear-gradient(180deg,rgba(13,43,25,.35),rgba(13,43,25,.9)),url(assets/hero-frame-C.webp) center/cover}
+  .cap-3{background:linear-gradient(180deg,rgba(13,43,25,.35),rgba(13,43,25,.9)),url(assets/hero-frame-D.webp) center/cover}
+  .payoff{background:var(--dark);min-height:0;padding:72px 24px 88px}
+  .payoff h2{font-size:30px}
+  .hdr nav{display:none}
+  .cards{flex-direction:column;gap:56px}
+  .card,.card:nth-child(n){width:100%;padding-top:0}
+  .metodo-top{flex-direction:column;gap:36px;margin-bottom:64px}
+  .metodo-top>div:first-child,.pillars{width:100%}
+  .row4>div{width:calc(50% - 16px)}
+  .contatti{flex-direction:column;gap:40px}
+  .contatti .info,.formcard{width:100%}
+  .ft{flex-direction:column;gap:32px}
+  .ft .legal,.ft .links{width:100%}
+}
+@media (max-width:640px){
+  .hdr{padding:12px var(--pad)}
+  .cap p{font-size:17px}
+  .row4>div{width:100%}
+  .fields{grid-template-columns:1fr}
+  .formcard{padding:22px}
+  .medu img{width:100%}
+  .btn{padding:14px 24px}
+  .ctas .btn{width:100%;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hdr" id="hdr">
+  <a href="#sec-hero" aria-label="LT3, inizio pagina"><img src="assets/lt3-logo.png" alt="LT3" width="44" height="55"></a>
+  <nav class="label" aria-label="Principale">
+    <a href="#sec-anime">Events</a>
+    <a href="#sec-anime">Communication</a>
+    <a href="#sec-anime">Scientific</a>
+    <a href="#sec-metodo">Chi siamo</a>
+    <a href="#sec-contatti">Contatti</a>
+  </nav>
+  <a class="btn btn-green btn-sm" href="#sec-contatti">Parliamone</a>
+</header>
+
+<main>
+<section class="hero" id="sec-hero" aria-label="Dal gesto clinico al Sistema Salute">
+  <div class="stage">
+    <div class="media" id="media">
+      <video id="vid" muted playsinline preload="auto" aria-hidden="true"></video>
+      <div class="scrim" id="scrim"></div>
+      <div class="load" id="load" aria-hidden="true"><i></i></div>
+      <div class="hint" id="hint" aria-hidden="true">SCORRI</div>
+    </div>
+    <div class="cap cap-1">
+      <span class="label">01 — La cura nasce nel dettaglio</span>
+      <p>Ogni decisione terapeutica e ogni gesto clinico richiedono certezze. Non facciamo semplice divulgazione: costruiamo le basi per rendere quel singolo momento di cura più sicuro, efficace e aggiornato.</p>
+    </div>
+    <div class="cap cap-2">
+      <span class="label">02 — La conoscenza diventa metodo</span>
+      <p>Dietro ogni competenza c'è un percorso strutturato. Con il nostro Comitato Scientifico progettiamo esperienze di apprendimento — residenziali, FAD e sul campo — che trasformano le più recenti evidenze della letteratura in protocolli applicabili sul lavoro.</p>
+    </div>
+    <div class="cap cap-3">
+      <span class="label">03 — La garanzia istituzionale</span>
+      <p>Siamo il tassello che collega la pratica clinica al Sistema Sanitario Nazionale. Come Provider accreditato AGENAS, certifichiamo il valore legale dei crediti formativi e rendicontiamo direttamente a Co.Ge.A.P.S., garantendo la piena conformità professionale di chi ogni giorno si prende cura del Paese.</p>
+    </div>
+    <div class="cap payoff">
+      <h2>Dal gesto del singolo alla salute di tutti: siamo il Provider ECM che certifica la qualità di chi cura.</h2>
+      <div class="ctas">
+        <a class="btn btn-white" href="#sec-contatti">Progettiamo il tuo prossimo evento</a>
+        <a class="btn btn-line" href="#sec-metodo">Scopri il metodo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="sec-anime">
+  <div class="wrap">
+    <div class="anime-head">
+      <span class="label" style="color:var(--green)">Le tre anime di LT3</span>
+      <h2>Eventi, comunicazione, scienza. Un solo metodo.</h2>
+      <p>Ogni anima lavora da sola o insieme alle altre: è LT3 Global Care, dall'idea alla chiusura dell'evento.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <img src="assets/anima-events.webp" alt="Auditorium di un congresso visto dall'ultima fila" width="1200" height="1490" loading="lazy">
+        <div class="head"><span class="sq"></span><span class="label">01 — Events</span></div>
+        <h3>Events</h3>
+        <p>Progettiamo e realizziamo eventi, congressi e residenziali, dall'idea alla chiusura.</p>
+        <a class="link" href="#sec-contatti">Parliamone</a>
+      </article>
+      <article class="card">
+        <img src="assets/anima-communication.webp" alt="Impaginati e bozze di comunicazione su un tavolo di lavoro" width="1200" height="1490" loading="lazy">
+        <div class="head"><span class="sq"></span><span class="label">02 — Communication</span></div>
+        <h3>Communication</h3>
+        <p>Comunicazione scientifica e di marca per il mondo Pharma.</p>
+        <a class="link" href="#sec-contatti">Parliamone</a>
+      </article>
+      <article class="card">
+        <img src="assets/anima-scientific.webp" alt="Biblioteca scientifica con tavolo di lettura e lampada verde" width="1200" height="1490" loading="lazy">
+        <div class="head"><span class="sq"></span><span class="label">03 — Scientific</span></div>
+        <h3>Scientific</h3>
+        <p>ECM, Comitato Scientifico, FAD, accreditamento e rendicontazione.</p>
+        <a class="link" href="#sec-contatti">Parliamone</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark on-dark" id="sec-metodo">
+  <div class="wrap">
+    <div class="metodo-top">
+      <div>
+        <span class="label">Il metodo</span>
+        <h2>Marketing, Medical Affairs, Market Access: un solo partner per progettare, accreditare e rendicontare.</h2>
+      </div>
+      <ul class="pillars">
+        <li><span class="sq"></span>Provider accreditato AGENAS</li>
+        <li><span class="sq"></span>Comitato Scientifico indipendente</li>
+        <li><span class="sq"></span>Rendicontazione a Co.Ge.A.P.S.</li>
+        <li><span class="sq"></span>Conformità normativa</li>
+      </ul>
+    </div>
+    <div class="row4">
+      <div><div class="num" data-count="23">23</div><p class="num-l">anni di attività</p></div>
+      <div><div class="num" data-count="330">330</div><p class="num-l">eventi l'anno (media degli ultimi 3 anni)</p></div>
+      <div><div class="num" data-count="6668">6.668</div><p class="num-l">medici ai corsi ECM l'anno (media degli ultimi 3 anni)</p></div>
+      <div><div class="num" data-count="11396">11.396</div><p class="num-l">partecipanti agli eventi nell'ultimo anno</p></div>
+    </div>
+    <div class="row4 steps">
+      <div class="step"><span class="label">01</span><h3>Brief</h3></div>
+      <div class="step"><span class="label">02</span><h3>Progetto scientifico</h3></div>
+      <div class="step"><span class="label">03</span><h3>Evento o esperienza</h3></div>
+      <div class="step"><span class="label">04</span><h3>Accreditamento e report</h3></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="sec-contatti">
+  <div class="wrap contatti">
+    <div class="info">
+      <span class="label" style="color:var(--green)">Contatti</span>
+      <h2>Raccontaci il tuo progetto.</h2>
+      <p><span class="sq"></span><span><strong>LT3 S.r.l.</strong><br>Via Regina, 61<br>22012 Cernobbio (CO)</span></p>
+      <p><span class="sq"></span><a href="tel:+39031511626">+39 031 511626</a></p>
+    </div>
+    <div class="formcard">
+      <form id="form" data-endpoint="" novalidate>
+        <div class="fields">
+          <div class="f"><label for="nome">Nome</label><input id="nome" name="nome" autocomplete="given-name" required></div>
+          <div class="f"><label for="cognome">Cognome</label><input id="cognome" name="cognome" autocomplete="family-name" required></div>
+          <div class="f"><label for="azienda">Azienda</label><input id="azienda" name="azienda" autocomplete="organization" required></div>
+          <div class="f"><label for="ruolo">Ruolo</label><input id="ruolo" name="ruolo" autocomplete="organization-title" required></div>
+          <div class="f"><label for="email">Email aziendale</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+          <div class="f"><label for="telefono">Telefono (facoltativo)</label><input id="telefono" name="telefono" type="tel" autocomplete="tel"></div>
+          <div class="f full"><label for="tipo">Tipo di progetto</label>
+            <select id="tipo" name="tipo" required>
+              <option value="" selected disabled>Seleziona</option>
+              <option>Evento</option><option>Comunicazione</option><option>Progetto ECM</option><option>Altro</option>
+            </select></div>
+          <div class="f full"><label for="messaggio">Messaggio</label><textarea id="messaggio" name="messaggio" rows="4"></textarea></div>
+          <label class="consent f full"><input type="checkbox" name="privacy" required> <span>Ho letto l'informativa privacy e acconsento al trattamento dei dati per essere ricontattato.</span></label>
+        </div>
+        <button class="btn btn-green" type="submit">Invia la richiesta</button>
+        <p class="err-msg" id="err" hidden>Non siamo riusciti a inviare la richiesta. Riprova tra poco o chiamaci al +39 031 511626.</p>
+      </form>
+      <p class="ok-msg" id="ok" hidden>Grazie, abbiamo ricevuto la tua richiesta.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <img src="assets/lt3-logo.png" alt="LT3" width="150" height="187" loading="lazy">
+      <div class="legal">
+        <span><strong>LT3 S.r.l.</strong><br>Via Regina, 61 · 22012 Cernobbio (CO)<br>P.IVA 02236240137 · Tel. +39 031 511626</span>
+        <small>Società soggetta a direzione e coordinamento da parte di Meduspace S.p.A. Società Benefit.</small>
+      </div>
+      <div class="links label">
+        <a href="https://www.lt3.it/">Privacy Policy</a>
+        <a href="https://www.lt3.it/">Cookie Policy</a>
+        <a href="#sec-contatti">Contatti</a>
+      </div>
+    </div>
+    <p class="copy">© 2026 LT3 S.r.l. Tutti i diritti riservati.</p>
+  </div>
+  <div class="medu"><img src="assets/member-of-meduspace.png" alt="Member of Meduspace" width="1996" height="212" loading="lazy"></div>
+</footer>
+
+<script>
+(function(){
+  /* header: trasparente sulla hero, pieno dopo */
+  var hdr=document.getElementById('hdr'),hero=document.getElementById('sec-hero');
+  function hs(){hdr.classList.toggle('solid',hero.getBoundingClientRect().bottom<140)}
+  addEventListener('scroll',hs,{passive:true});addEventListener('resize',hs);hs();
+
+  /* contatori */
+  var nums=[].slice.call(document.querySelectorAll('[data-count]'));
+  if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting)return;io.unobserve(e.target);
+      var el=e.target,end=+el.dataset.count,t0=performance.now(),d=1800;
+      (function step(t){var k=Math.min(1,(t-t0)/d),v=Math.round(end*(1-Math.pow(1-k,3)));
+        el.textContent=String(v).replace(/\B(?=(\d{3})+(?!\d))/g,'.');if(k<1)requestAnimationFrame(step)})(t0);
+    })},{threshold:.4});
+    nums.forEach(function(n){n.textContent='0';io.observe(n)});
+  }
+
+  /* form: invia a data-endpoint se impostato, altrimenti mostra solo la conferma */
+  var form=document.getElementById('form'),ok=document.getElementById('ok'),err=document.getElementById('err');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();err.hidden=true;
+    if(!form.checkValidity()){form.reportValidity();return}
+    function done(){form.hidden=true;ok.hidden=false}
+    var ep=form.getAttribute('data-endpoint');
+    if(!ep){done();return}
+    var data={};new FormData(form).forEach(function(v,k){data[k]=v});
+    fetch(ep,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)})
+      .then(function(r){r.ok?done():Promise.reject()}).catch(function(){err.hidden=false});
+  });
+
+  /* hero a scorrimento: il video avanza e torna indietro con lo scroll */
+  if(matchMedia('(max-width:1024px),(prefers-reduced-motion:reduce)').matches)return;
+  var v=document.getElementById('vid'),bar=document.querySelector('#load i'),media=document.getElementById('media'),
+      scrim=document.getElementById('scrim'),hint=document.getElementById('hint'),
+      caps=[].slice.call(hero.querySelectorAll('.cap'));
+  var B=[[0,.30],[.33,.60],[.66,.86],[.90,1.01]],                       /* bande dei testi */
+      MP=[[0,0],[.30,5.4],[.62,12.2],[.88,15.125],[1,15.125]];          /* scroll -> secondi di video */
+  var tgt=0,cur=0,dur=0,seeking=false,ready=false,last=0,raf=0,shown=-2;
+  function clamp(x){return x<0?0:x>1?1:x}
+  function vt(p){for(var i=1;i<MP.length;i++){if(p<=MP[i][0]){var a=MP[i-1],b=MP[i];return a[1]+(b[1]-a[1])*((p-a[0])/(b[0]-a[0]))}}return MP[MP.length-1][1]}
+  function prog(){var h=hero.offsetHeight-innerHeight*1.4;return h>0?clamp(-hero.getBoundingClientRect().top/h):0}
+  function bands(p){var k=-1;for(var i=0;i<B.length;i++){if(p>=B[i][0]&&p<B[i][1]){k=i;break}}
+    if(k!==shown){shown=k;caps.forEach(function(c,i){c.classList.toggle('on',i===k)});scrim.style.opacity=k<0?0:(k===3?.75:1)}
+    hint.style.opacity=p<.02?1:0}
+  function frame(t){raf=0;var dt=Math.min(.1,((t-last)/1000)||.016);last=t;
+    tgt=prog();cur+=(tgt-cur)*(1-Math.exp(-dt*9));if(Math.abs(tgt-cur)<.0004)cur=tgt;
+    bands(tgt);
+    if(ready&&!seeking){var want=Math.min(vt(cur),dur-.02);if(Math.abs(v.currentTime-want)>.012){seeking=true;v.currentTime=want}}
+    if(Math.abs(tgt-cur)>.0004||seeking)raf=requestAnimationFrame(frame)}
+  function kick(){if(!raf){last=performance.now();raf=requestAnimationFrame(frame)}}
+  addEventListener('scroll',kick,{passive:true});addEventListener('resize',kick);
+  v.addEventListener('seeked',function(){seeking=false;kick()});
+  function loaded(){document.getElementById('load').style.opacity=0}
+  var x=new XMLHttpRequest();x.open('GET','assets/hero-scrub.mp4');x.responseType='blob';
+  x.onprogress=function(e){if(e.lengthComputable)bar.style.width=(e.loaded/e.total*100)+'%'};
+  x.onload=function(){if(x.status<200||x.status>=300)return loaded();
+    v.src=URL.createObjectURL(x.response);
+    v.addEventListener('loadedmetadata',function(){dur=v.duration;ready=true;media.classList.add('ok');loaded();kick()},{once:true});v.load()};
+  x.onerror=loaded;x.send();
+  bands(0);kick();
+})();
+</script>
+</body>
+</html>
